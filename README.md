@@ -1,1 +1,1 @@
-Live Video Chat aaplication
+Website where you can create and join webinars
