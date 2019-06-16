@@ -26,6 +26,7 @@ localVideoEl.hide();
     // const id = webrtc.getDomId(peer);
     // const html = remoteVideoTemplate({ id });
     //   remoteVideosEl.html(html);
+    showChatRoom();
     if(remoteVideosCount==1){
         alert("Room is Full");
         return;
@@ -40,17 +41,17 @@ localVideoEl.hide();
   const createRoom = (roomName) => {
     webrtc.createRoom(roomName, (err, name) => {
         console.log(`Created ${roomName}`);
-    //   formEl.form('clear');
-    //   showChatRoom(name);
-    //   postMessage(`${username} created chatroom`);
+      formEl.form('clear');
+      showChatRoom2();
+      postMessage(`${username} created chatroom`);
     });
   };
 
   const joinRoom = (roomName,userName) => {
     webrtc.joinRoom(roomName);
     console.log(`Joined ${roomName}`);
-    // showChatRoom(roomName);
-    // postMessage(`${username} joined chatroom`);
+    showChatRoom();
+    postMessage(`${username} joined chatroom`);
   };
   function pauseVideo(){
 webrtc.pauseVideo();
@@ -74,19 +75,26 @@ document.getElementById('pa').disabled = false;
 document.getElementById('ra').disabled = true;
       }
 
+      function showChatRoom(){
+        document.getElementById("chatiframe").style="display: inline-block"
+      }
+
+      function showChatRoom2(){
+        document.getElementById("chatiframe2").style="display: inline-block"
+      }
   $('.submit').on('click', (event) => {
     username = $('#username').val();
     const roomName = $('#roomName').val().toLowerCase();
     $("#formEle").html(`Room - ${roomName}`);
     if (event.target.id === 'create-btn') {
       createRoom(roomName);
+      showChatRoom2()
     } else {
       $("#remote").show();
       joinRoom(roomName,username);
     }
     return false;
   });
-
   // $('#share_screen').on('click', (event) => {
   // webrtc.getLocalScreen();
   // });

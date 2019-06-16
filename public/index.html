@@ -18,29 +18,76 @@
     <script src="scripts/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-<center><h1 class="display-3" style="font-family:Montserrat">Webinar</h1></center>
+<center><h1 class="display-3" style="font-family:Montserrat">BrightMinds Academy</h1></center>
 <hr>
 <center>
 <div id="formEle">
   
     <form class="form" id="form-fill">
         <center>
-      <label>User Name</label>
+            
+          <label>User Name</label>
       <input type="text" placeholder="Enter user name" id="username" name="username" required>
     
       <label>Room</label>
       <input type="text" placeholder="Enter room name" id="roomName" name="roomName" required>
     <br>
+    <script>
+        console.log(window.location.href)
+        var link=window.location.href
+        var i=0
+        var rname=""
+        var uname=""
+        for(i;i<link.length;i++){
+          if(link[i]==="=")
+          {
+            i++;
+            break;
+          }
+        }
 
+        for(i;i<link.length;i++){
+          if(link[i]==="&")
+          {
+          break;
+          }
+          rname+=link[i]
+          
+        }
+        for(i;i<link.length;i++){
+          if(link[i]==="=")
+          {
+            i++;
+            break;
+          }
+        }
+        for(i;i<link.length;i++){
+          uname+=link[i]
+        }
+        console.log(uname)
+        localStorage.setItem("stuname",uname)
+        console.log(rname)
+        localStorage.setItem("roname",rname)
+        
+        document.getElementById("roomName").value=rname
+      document.getElementById("roomName").disabled=true
+      document.getElementById("username").value=uname
+      document.getElementById("username").disabled=true
+     
+     </script>
     <button class="submit btn btn-primary" type="submit" id="join-btn">Join</button>
   </center>
     </form>
   </div>
 </center>
+
+
  <!-- Local Camera -->
  <center>
  <div class="row" id="remote" style="display:none">
-   <div class="col-md-3"></div>
+   <div class="col-md-3">
+
+   </div>
   <div class="col-md-6">
   <div>
   <h3 class="display-5">Remote Camera</h3>
@@ -49,9 +96,16 @@
       </div>
   </div>
   </div>
-  <div class="col-md-3"></div>
+  <div class="col-md-3">    <iframe id ="chatiframe" height="90%" width="100%"  style="display: none;" ></iframe> 
+  
+<script>
+    document.getElementById("chatiframe").src=`http://192.168.21.84:4000/chat.html?name=${uname}&room=${rname}`
+
+</script>
+  </div>
 </div>
 </center>
+
 <!-- <p align="center"><input type="button" id="share_screen" value="Share screen"/></p> -->
 <!-- <p align="center"><video id="video" autoplay/></p>
 <script language="javascript">
@@ -75,7 +129,8 @@
                 }
           )
     })
-</script> -->
+
+  </script> -->
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="scripts/semantic-ui-css/semantic.min.js"></script> -->

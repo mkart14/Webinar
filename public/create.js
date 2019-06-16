@@ -12,3 +12,5 @@
     localImageEl.hide();
     localVideoEl.show();
   });
+
+  
